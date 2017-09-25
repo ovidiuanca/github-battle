@@ -4,7 +4,7 @@
   "description": "Compact React app using webpack, npm and babel.",
   "main": "index.js",
   "scripts": {
-    "create": "webpack"
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
