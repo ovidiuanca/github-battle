@@ -26,6 +26,22 @@ body {
   cursor: pointer;
 }
 
-.selected-language {
+.selected-all {
+  color: #0061ff;
+}
+
+.selected-ruby {
   color: #d6420c;
+}
+
+.selected-javascript {
+  color: #e2cf3f;
+}
+
+.selected-elixir {
+  color: #8c47b7;
+}
+
+.selected-java {
+  color: #b77d47;
 }

@@ -11,7 +11,7 @@ var SelectLanguage = function(props) {
           <li
             onClick={props.onSelect.bind(null, language)}
             className={props.selectedLanguage === language
-              ? "languages selected-language"
+              ? `languages selected-${language.toLowerCase()}`
               : "languages"}
             key={index}>{language}</li>
         );
