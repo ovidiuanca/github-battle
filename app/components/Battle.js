@@ -102,9 +102,6 @@ class Battle extends React.Component {
     var playerTwoImage = this.state.playerTwoImage;
     var match = this.props.match;
 
-    console.log(playerOneImage)
-    console.log(playerTwoImage)
-
     return(
       <div>
         <div className='row'>

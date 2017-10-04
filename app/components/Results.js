@@ -47,8 +47,6 @@ class Results extends React.Component {
     var error = this.state.error;
     var loading = this.state.loading;
 
-    console.log(this.state)
-
     return(
       <div>
         {loading && <Loading />}
