@@ -2,32 +2,7 @@ var React = require('react');
 var PropTypes = require('prop-types');
 var Link = require('react-router-dom').Link;
 
-function PlayerPreview(props) {
-  return (
-    <div>
-      <div className='column'>
-        <img
-          className='avatar'
-          src={props.avatar}
-          alt={'Username for ' + props.username}
-        />
-        <h2 className='header'>@{props.username}</h2>
-        <button
-          className='reset'
-          onClick={props.onReset.bind(null, props.id)}>
-            Reset
-        </button>
-      </div>
-    </div>
-  );
-}
-
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired
-}
+var PlayerPreview = require('./PlayerPreview');
 
 class PlayerInput extends React.Component {
   constructor(props) {
@@ -127,6 +102,9 @@ class Battle extends React.Component {
     var playerTwoImage = this.state.playerTwoImage;
     var match = this.props.match;
 
+    console.log(playerOneImage)
+    console.log(playerTwoImage)
+
     return(
       <div>
         <div className='row'>
@@ -138,9 +116,14 @@ class Battle extends React.Component {
               />
             : <PlayerPreview
                 avatar={playerOneImage}
-                id='playerOne'
                 username={playerOneName}
-                onReset={this.handleReset}/>
+              >
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(null, 'playerOne')}>
+                    Reset
+                </button>
+              </PlayerPreview>
           }
           {!playerTwoName
             ? <PlayerInput
@@ -150,9 +133,14 @@ class Battle extends React.Component {
               />
             : <PlayerPreview
                 avatar={playerTwoImage}
-                id='playerTwo'
                 username={playerTwoName}
-                onReset={this.handleReset}/>
+              >
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(null, 'playerTwo')}>
+                    Reset
+                </button>
+              </PlayerPreview>
           }
         </div>
         {playerOneImage && playerTwoImage

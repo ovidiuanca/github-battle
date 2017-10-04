@@ -4,7 +4,8 @@
   "description": "Compact React app using webpack, npm and babel.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+	"share": "webpack-dev-server --port 3000 --hot --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/ovidiucota/github-battle#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2"
