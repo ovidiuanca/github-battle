@@ -5,6 +5,7 @@ var Link = require('react-router-dom').Link;
 var PropTypes = require('prop-types');
 
 var PlayerPreview = require('./PlayerPreview');
+var Loading = require('./Loading');
 
 class Results extends React.Component {
   constructor(props) {
@@ -50,12 +51,12 @@ class Results extends React.Component {
 
     return(
       <div>
-        {loading && <p>Loading...</p>}
+        {loading && <Loading />}
         {error && <p>{error}</p>}
         {!loading && <Link className='button' to='/battle'>Reset</Link>}
         {!loading && !error &&
           <div className='row'>
-            <div class='column'>
+            <div>
               <h3 className='header'>Winner</h3>
               <h3 className='header'>{'Score: ' + winner.score}</h3>
               <PlayerPreview
@@ -68,7 +69,7 @@ class Results extends React.Component {
                 </div>
               </PlayerPreview>
             </div>
-            <div class='column'>
+            <div>
               <h3 className='header'>Loser</h3>
               <h3 className='header'>{'Score: ' + loser.score}</h3>
               <PlayerPreview
