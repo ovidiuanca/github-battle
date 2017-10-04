@@ -57,6 +57,7 @@ class Results extends React.Component {
           <div className='row'>
             <div class='column'>
               <h3 className='header'>Winner</h3>
+              <h3 className='header'>{'Score: ' + winner.score}</h3>
               <PlayerPreview
                 avatar={winner.profile.data.avatar_url}
                 username={winner.profile.data.login}
@@ -69,6 +70,7 @@ class Results extends React.Component {
             </div>
             <div class='column'>
               <h3 className='header'>Loser</h3>
+              <h3 className='header'>{'Score: ' + loser.score}</h3>
               <PlayerPreview
                 avatar={loser.profile.data.avatar_url}
                 username={loser.profile.data.login}
