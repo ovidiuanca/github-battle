@@ -1,15 +1,15 @@
-var React = require('react');
-var PropTypes = require('prop-types');
-var api = require('../utils/api')
+import React from 'react';
+import PropTypes from 'prop-types';
+import api from '../utils/api';
 
-var Loading = require('./Loading');
+import Loading from './Loading';
 
-var SelectLanguage = function(props) {
-  var languages = ['All', 'Ruby', 'Javascript', 'Elixir', 'Java'];
+function SelectLanguage(props) {
+  const languages = ['All', 'Ruby', 'Javascript', 'Elixir', 'Java'];
 
   return (
     <ul className="languages">
-      {languages.map(function(language, index) {
+      {languages.map((language, index) => {
         return(
           <li
             onClick={props.onSelect.bind(null, language)}
@@ -18,7 +18,7 @@ var SelectLanguage = function(props) {
               : "languages"}
             key={index}>{language}</li>
         );
-      }, this)}
+      })}
     </ul>
   );
 }
@@ -28,24 +28,24 @@ SelectLanguage.propTypes = {
   selectedLanguage: PropTypes.string
 }
 
-var RepoGrid = function(props) {
+function RepoGrid(props) {
   return(
     <ul className='popular-list'>
-      {props.repos.map(function(repo, index) {
+      {props.repos.map(({name, owner, html_url, stargazers_count}, index) => {
         return (
-          <li key={repo.name} className='popular-item'>
+          <li key={name} className='popular-item'>
             <div className='popular-rank'>#{index + 1}</div>
             <ul className='space-list-items'>
               <li>
                 <img
                   className='avatar'
-                  src={repo.owner.avatar_url}
+                  src={owner.avatar_url}
                   alt="Avatar for #{repo.owner.login}"
                 />
               </li>
-              <li><a href={repo.html_url}>{repo.name }</a></li>
-              <li>@{repo.owner.login}</li>
-              <li>{repo.stargazers_count} stars</li>
+              <li><a href={html_url}>{name }</a></li>
+              <li>@{owner.login}</li>
+              <li>{stargazers_count} stars</li>
             </ul>
           </li>
         );
@@ -58,7 +58,7 @@ RepoGrid.propTypes = {
   repos: PropTypes.array.isRequired
 }
 
-class Popular extends React.Component {
+export default class Popular extends React.Component {
   constructor(props) {
     super();
 
@@ -73,20 +73,14 @@ class Popular extends React.Component {
     this.setLanguage(this.state.selectedLanguage);
   }
   setLanguage(lang) {
-    this.setState(function(){
-      return {
-        selectedLanguage: lang,
-        repos: null
-      }
-    });
+    this.setState(() => ({
+      selectedLanguage: lang,
+      repos: null
+    }));
     api.fetchPopularRepos(lang)
-      .then(function(repos){
-        this.setState(function(){
-          return {
-            repos: repos
-          }
-        });
-      }.bind(this));
+      .then((repos) => {
+        this.setState(() => ({ repos: repos }))
+      });
   }
   render() {
     return(
@@ -102,5 +96,3 @@ class Popular extends React.Component {
     );
   }
 }
-
-module.exports = Popular;

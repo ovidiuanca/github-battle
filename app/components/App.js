@@ -1,19 +1,16 @@
-var React = require('react');
-var Popular = require('./Popular');
-var ReactRouter = require('react-router-dom');
-var Router = ReactRouter.BrowserRouter;
-var Route = ReactRouter.Route;
-var Switch = ReactRouter.Switch;
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-var Nav = require('./Nav');
-var Home = require('./Home');
-var Battle = require('./Battle');
-var Results = require('./Results');
+import Popular from './Popular';
+import Nav from './Nav';
+import Home from './Home';
+import Battle from './Battle';
+import Results from './Results';
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return(
-      <Router>
+      <BrowserRouter>
         <div className="container">
           <Nav />
           <Switch>
@@ -21,16 +18,10 @@ class App extends React.Component {
             <Route exact path='/battle' component={Battle} />
             <Route path='/battle/results' component={Results} />
             <Route exact path='/popular' component={Popular} />
-            <Route render={function(){
-              return (
-                <p>Not found!</p>
-              );
-            }}/>
+            <Route render={() => <p>Not found!</p>} />
           </Switch>
         </div>
-      </Router>
+      </BrowserRouter>
     )
   }
 }
-
-module.exports = App;

@@ -1,13 +1,13 @@
-var React = require('react');
-var queryString = require('query-string');
-var api = require('../utils/api');
-var Link = require('react-router-dom').Link;
-var PropTypes = require('prop-types');
+import React from 'react';
+import queryString from 'query-string';
+import api from '../utils/api';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-var PlayerPreview = require('./PlayerPreview');
-var Loading = require('./Loading');
+import PlayerPreview from './PlayerPreview';
+import Loading from './Loading';
 
-class Results extends React.Component {
+export default class Results extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,33 +19,27 @@ class Results extends React.Component {
     }
   }
   componentDidMount() {
-    var players = queryString.parse(this.props.location.search);
+    const players = queryString.parse(this.props.location.search);
+    const { playerOneName, playerTwoName } = players;
 
-    api.battle([players.playerOneName, players.playerTwoName])
-      .then(function(results) {
+    api.battle([playerOneName, playerTwoName])
+      .then((results) => {
         if (results === null) {
-          this.setState(function() {
-            return {
-              error: "There is an error. Make sure both users are on GitHub.",
-              loading: false
-            }
-          });
+          this.setState(() => ({
+            error: "There is an error. Make sure both users are on GitHub.",
+            loading: false
+          }));
         }
-        this.setState(function() {
-          return {
-            winner: results[0],
-            loser: results[1],
-            loading: false,
-            error: null
-          }
-        });
-      }.bind(this))
+        this.setState(() => ({
+          winner: results[0],
+          loser: results[1],
+          loading: false,
+          error: null
+        }));
+      })
   }
   render() {
-    var winner = this.state.winner;
-    var loser = this.state.loser;
-    var error = this.state.error;
-    var loading = this.state.loading;
+    const { winner, loser, error, loading } = this.state;
 
     return(
       <div>
@@ -87,5 +81,3 @@ class Results extends React.Component {
     )
   }
 }
-
-module.exports = Results;
